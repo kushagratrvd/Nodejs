@@ -1,0 +1,81 @@
+{
+  "info": {
+    "name": "School Management API - LIVE",
+    "description": "Live API collection for School Management System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "school-management-api-live",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{liveBaseUrl}}/health",
+          "host": ["{{liveBaseUrl}}"],
+          "path": ["health"]
+        },
+        "description": "Check if the live API is running"
+      }
+    },
+    {
+      "name": "Add School",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Live Test School\",\n  \"address\": \"456 Live Street, Test City 12345\",\n  \"latitude\": 12.9716,\n  \"longitude\": 77.5946\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{liveBaseUrl}}/addSchool",
+          "host": ["{{liveBaseUrl}}"],
+          "path": ["addSchool"]
+        },
+        "description": "Add a school to the live API"
+      }
+    },
+    {
+      "name": "List Schools",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{liveBaseUrl}}/listSchools?latitude=12.9716&longitude=77.5946",
+          "host": ["{{liveBaseUrl}}"],
+          "path": ["listSchools"],
+          "query": [
+            {
+              "key": "latitude",
+              "value": "12.9716"
+            },
+            {
+              "key": "longitude",
+              "value": "77.5946"
+            }
+          ]
+        },
+        "description": "Get schools sorted by proximity from live API"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "liveBaseUrl",
+      "value": "https://your-app-name.onrender.com/api",
+      "type": "string"
+    }
+  ]
+} 
