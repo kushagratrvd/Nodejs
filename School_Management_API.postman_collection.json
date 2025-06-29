@@ -1,0 +1,154 @@
+{
+  "info": {
+    "name": "School Management API",
+    "description": "Complete API collection for School Management System with Node.js and MySQL",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "school-management-api-collection",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        },
+        "description": "Check if the API is running and healthy"
+      },
+      "response": []
+    },
+    {
+      "name": "Add School",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Example High School\",\n  \"address\": \"123 Main Street, City, State 12345\",\n  \"latitude\": 12.9716,\n  \"longitude\": 77.5946\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/addSchool",
+          "host": ["{{baseUrl}}"],
+          "path": ["addSchool"]
+        },
+        "description": "Add a new school to the database with validation"
+      },
+      "response": []
+    },
+    {
+      "name": "Add School - Invalid Data",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"\",\n  \"address\": \"Short\",\n  \"latitude\": 100,\n  \"longitude\": 200\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/addSchool",
+          "host": ["{{baseUrl}}"],
+          "path": ["addSchool"]
+        },
+        "description": "Test validation with invalid data"
+      },
+      "response": []
+    },
+    {
+      "name": "List Schools",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/listSchools?latitude=12.9716&longitude=77.5946",
+          "host": ["{{baseUrl}}"],
+          "path": ["listSchools"],
+          "query": [
+            {
+              "key": "latitude",
+              "value": "12.9716",
+              "description": "User's latitude coordinate"
+            },
+            {
+              "key": "longitude",
+              "value": "77.5946",
+              "description": "User's longitude coordinate"
+            }
+          ]
+        },
+        "description": "Get all schools sorted by proximity to user location"
+      },
+      "response": []
+    },
+    {
+      "name": "List Schools - Invalid Coordinates",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/listSchools?latitude=100&longitude=200",
+          "host": ["{{baseUrl}}"],
+          "path": ["listSchools"],
+          "query": [
+            {
+              "key": "latitude",
+              "value": "100",
+              "description": "Invalid latitude (out of range)"
+            },
+            {
+              "key": "longitude",
+              "value": "200",
+              "description": "Invalid longitude (out of range)"
+            }
+          ]
+        },
+        "description": "Test validation with invalid coordinates"
+      },
+      "response": []
+    },
+    {
+      "name": "List Schools - Missing Parameters",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/listSchools",
+          "host": ["{{baseUrl}}"],
+          "path": ["listSchools"]
+        },
+        "description": "Test validation with missing required parameters"
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api",
+      "type": "string"
+    }
+  ]
+} 
